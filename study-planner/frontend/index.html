@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Study Planner helps students organize subjects, tasks, and study sessions.">
+  <title>Study Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Study Planner home"><span class="brand-mark">S</span><span>Study Planner<small>Make every session count</small></span></a>
+      <nav aria-label="Main navigation">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-view="tasks"><span>☷</span> My tasks</button>
+        <button class="nav-item" data-view="subjects"><span>▤</span> Subjects</button>
+      </nav>
+      <div class="sidebar-note"><span class="note-icon">✦</span><strong>Small steps add up.</strong><p>Plan a little today, feel more prepared tomorrow.</p></div>
+      <div class="sidebar-footer">STUDY SMART · STAY BALANCED</div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow" id="today-label">YOUR STUDY SPACE</p><h1 id="page-title">Dashboard</h1></div>
+        <button id="add-task-top" class="primary-button">＋ Add task</button>
+      </header>
+      <section class="welcome-banner">
+        <div><p class="eyebrow light">YOUR PERSONAL STUDY PLANNER</p><h2>Make today count.</h2><p>Turn your goals into manageable study sessions.</p></div>
+        <div class="banner-art" aria-hidden="true"><span class="art-circle"></span><span class="art-book">▤</span><span class="art-star">✦</span></div>
+      </section>
+      <section class="stats-grid" aria-label="Study summary">
+        <article class="stat-card"><div class="stat-top"><span>Tasks planned</span><span class="stat-icon lavender">☷</span></div><strong id="stat-total">0</strong><small>Across all subjects</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon mint">✓</span></div><strong id="stat-done">0</strong><small>Tasks you've finished</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Due soon</span><span class="stat-icon peach">◷</span></div><strong id="stat-due">0</strong><small>Due in the next 7 days</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Subjects</span><span class="stat-icon blue">▤</span></div><strong id="stat-subjects">0</strong><small>In your learning list</small></article>
+      </section>
+      <div class="content-grid">
+        <section class="panel task-panel">
+          <div class="panel-heading"><div><p class="eyebrow">KEEP MOVING FORWARD</p><h2 id="list-heading">Upcoming tasks</h2></div><button class="text-button" id="view-all">View all →</button></div>
+          <div class="filter-row"><input id="task-search" type="search" placeholder="Search tasks..." aria-label="Search tasks"><select id="status-filter" aria-label="Filter by status"><option value="all">All statuses</option><option value="pending">Pending</option><option value="completed">Completed</option></select></div>
+          <div id="task-list" class="task-list"><div class="empty-state">Loading your study plan…</div></div>
+        </section>
+        <aside class="panel side-panel">
+          <div class="panel-heading"><div><p class="eyebrow">BUILD A ROUTINE</p><h2>Your subjects</h2></div><button id="add-subject-open" class="icon-button" aria-label="Add subject">＋</button></div>
+          <form id="subject-form" class="inline-form"><label for="subject-name">Add a subject</label><div class="inline-fields"><input id="subject-name" maxlength="80" placeholder="e.g. Mathematics" required><button class="primary-button small" type="submit">Add</button></div><p class="form-message" id="subject-message" role="status"></p></form>
+          <div id="subject-list" class="subject-list"></div>
+          <div class="focus-card"><span>✦</span><div><strong>Focus tip</strong><p>Try one small task at a time and take short breaks between sessions.</p></div></div>
+        </aside>
+      </div>
+      <footer>Built for your goals, one session at a time. <span>Study Planner</span></footer>
+    </main>
+  </div>
+  <dialog id="task-dialog" class="modal">
+    <form id="task-form" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">PLAN YOUR NEXT STEP</p><h2 id="task-dialog-title">Add a study task</h2></div><button class="icon-button" type="button" data-close="task-dialog" aria-label="Close">×</button></div>
+      <input id="task-id" type="hidden">
+      <label for="task-title">Task title *</label><input id="task-title" maxlength="160" required placeholder="e.g. Revise algebra chapter">
+      <label for="task-subject">Subject</label><select id="task-subject"><option value="">No subject</option></select>
+      <div class="two-fields"><div><label for="task-due">Due date</label><input id="task-due" type="date"></div><div><label for="task-minutes">Study time (minutes)</label><input id="task-minutes" type="number" min="5" max="720" value="30"></div></div>
+      <label for="task-notes">Notes</label><textarea id="task-notes" maxlength="2000" rows="3" placeholder="What do you want to cover?"></textarea>
+      <p id="task-message" class="form-message" role="status"></p>
+      <div class="modal-actions"><button type="button" class="secondary-button" data-close="task-dialog">Cancel</button><button type="submit" class="primary-button">Save task</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
